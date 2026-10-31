@@ -1,0 +1,127 @@
+/* Nocturne | main stylesheet */
+
+/* 1. Colors, fonts and global rules */
+:root {
+  --black: #080708;
+  --charcoal: #161315;
+  --charcoal-2: #211d20;
+  --crimson: #7a0c1c; /* dark crimson: borders, buttons */
+  --crimson-text: #d9485f; /* lighter crimson: small text, readable on black */
+  --silver: #b4b2ad; /* muted silver */
+  --silver-dim: #8d8b87;
+  --bone: #d6d2ca;
+  --display: "UnifrakturCook", "Old English Text MT", serif;
+  --body: "EB Garamond", Garamond, Georgia, serif;
+  --wrap: 68rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body { margin: 0; background: var(--black); color: var(--bone); font: 1.15rem/1.7 var(--body); }
+[hidden] { display: none !important; }
+
+/* Grain (noise) and vignette laid over the whole page */
+body::before, body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+body::before {
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+body::after { background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.7)); }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700; color: var(--silver); line-height: 1.1; margin: 0 0 0.5em; }
+p { margin: 0 0 1em; }
+a { color: var(--silver); text-underline-offset: 0.2em; text-decoration-color: var(--crimson); transition: color 0.25s; }
+a:hover { color: #fff; }
+:focus-visible { outline: 2px solid var(--crimson-text); outline-offset: 3px; }
+
+/* 2. Navigation (Flexbox) */
+.site-header { position: sticky; top: 0; z-index: 40; background: rgba(8, 7, 8, 0.9); backdrop-filter: blur(6px); border-bottom: 1px solid var(--crimson); }
+.nav { max-width: var(--wrap); margin: auto; padding: 0.6rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { font-family: var(--display); font-size: 1.9rem; text-decoration: none; }
+.nav__menu { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
+.nav__menu a { text-decoration: none; padding: 0.3rem 0; border-bottom: 1px solid transparent; transition: border-color 0.25s, color 0.25s; }
+.nav__menu a:hover, .nav__menu a.is-active { border-color: var(--crimson-text); color: #fff; }
+.nav__toggle { display: none; background: none; border: 1px solid var(--silver-dim); color: var(--silver); font: inherit; padding: 0.3rem 0.9rem; cursor: pointer; }
+
+/* 3. Hero (Grid): the blackletter name is the one big moment */
+.hero { max-width: var(--wrap); margin: auto; min-height: calc(100svh - 4rem); padding: 4rem 1.25rem; display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 3rem; }
+.hero__title { font-size: clamp(3.5rem, 11vw, 8rem); margin: 0 0 0.2em; animation: rise 1.4s ease-out both; }
+.hero__lead { max-width: 34rem; font-size: 1.3rem; color: var(--silver); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+@keyframes rise { from { opacity: 0; letter-spacing: 0.2em; filter: blur(6px); } to { opacity: 1; letter-spacing: 0; filter: blur(0); } }
+
+/* Gothic window: a pointed arch cut with clip-path, with a thin silver edge */
+.arch { --shape: polygon(50% 0, 86% 20%, 100% 52%, 100% 100%, 0 100%, 0 52%, 14% 20%); display: grid; justify-self: center; width: min(100%, 19rem); aspect-ratio: 3 / 5; padding: 2px; background: var(--silver-dim); clip-path: var(--shape); }
+.arch::before {
+  content: ""; clip-path: var(--shape);
+  background: linear-gradient(var(--silver-dim), var(--silver-dim)) center / 2px 100% no-repeat, radial-gradient(circle at 50% 30%, var(--crimson), var(--black) 70%);
+}
+
+/* 4. Buttons */
+.btn { display: inline-block; padding: 0.65rem 1.6rem; background: var(--crimson); color: var(--bone); border: 1px solid var(--crimson); font: inherit; text-decoration: none; cursor: pointer; transition: background 0.25s, border-color 0.25s, transform 0.25s; }
+.btn:hover { background: #950f24; border-color: var(--silver-dim); color: #fff; transform: translateY(-2px); }
+.btn--ghost { background: transparent; border-color: var(--silver-dim); }
+.btn--ghost:hover { background: var(--charcoal-2); }
+
+/* 5. Content sections and the ornamental rule under each heading */
+.section { max-width: var(--wrap); margin: auto; padding: 5rem 1.25rem; }
+.section h2 { font-size: clamp(2.4rem, 6vw, 3.6rem); margin-bottom: 0.2em; }
+.prose { max-width: 38rem; }
+.rule { display: flex; align-items: center; gap: 1rem; color: var(--crimson-text); margin-bottom: 2rem; }
+.rule::before, .rule::after { content: ""; height: 1px; background: var(--crimson); }
+.rule::before { width: 3rem; }
+.rule::after { flex: 1; background: linear-gradient(90deg, var(--crimson), transparent); }
+
+/* 6. Cards: double border and faint scratches */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; }
+.grid--wide { grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.card { padding: 1.5rem; background: var(--charcoal) repeating-linear-gradient(97deg, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 6px); border: 1px solid var(--crimson); outline: 1px solid rgba(180, 178, 173, 0.18); outline-offset: -7px; transition: border-color 0.25s, box-shadow 0.25s; }
+.card:hover { border-color: var(--crimson-text); box-shadow: 0 0 1.5rem rgba(122, 12, 28, 0.45); }
+.card h3 { font-size: 1.7rem; }
+.status { color: var(--crimson-text); font-style: italic; margin: 0; }
+.card--empty { display: grid; place-content: center; text-align: center; min-height: 12rem; border-style: dashed; color: var(--silver-dim); }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0 0 1rem; list-style: none; }
+.tags li { border: 1px solid var(--silver-dim); padding: 0 0.6rem; font-size: 0.95rem; }
+.more { background: none; border: 0; border-bottom: 1px solid var(--crimson-text); color: var(--silver); font: inherit; padding: 0; cursor: pointer; }
+.more:hover { color: #fff; }
+.card__details { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(180, 178, 173, 0.2); }
+
+/* 7. Cassette player */
+.tape { max-width: 30rem; }
+.tape__shell { background: linear-gradient(#2b2629, #1a1618); border: 2px solid var(--silver-dim); border-radius: 0.7rem; padding: 1rem; }
+.tape__label { display: flex; justify-content: space-between; gap: 1rem; background: var(--bone); color: var(--black); padding: 0.5rem 0.8rem; font-style: italic; border-left: 0.5rem solid var(--crimson); }
+.tape__window { display: flex; justify-content: space-around; align-items: center; margin: 0.9rem 2rem 0; padding: 0.6rem; background: var(--black); border-radius: 2rem; }
+.reel { width: 3rem; height: 3rem; border-radius: 50%; border: 0.45rem dotted var(--silver); background: radial-gradient(var(--silver-dim) 22%, transparent 24%); }
+.is-playing .reel { animation: spin 2.4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tape__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1rem; }
+.tape__controls input { accent-color: var(--crimson); vertical-align: middle; }
+
+/* 8. Contact form */
+.form { display: grid; gap: 1.25rem; max-width: 36rem; }
+.field { display: grid; gap: 0.35rem; }
+.field input, .field textarea { font: inherit; color: var(--bone); background: var(--charcoal); border: 1px solid var(--silver-dim); padding: 0.65rem 0.8rem; }
+.field input:focus, .field textarea:focus { border-color: var(--crimson-text); outline: none; box-shadow: 0 0 0 2px var(--crimson); }
+.field.invalid input, .field.invalid textarea { border-color: var(--crimson-text); }
+.error { color: var(--crimson-text); min-height: 1.2em; font-size: 1rem; }
+.form__status { margin: 0; color: var(--silver); }
+.form .btn { justify-self: start; }
+
+/* 9. Footer */
+.site-footer { border-top: 1px solid var(--crimson); text-align: center; padding: 2.5rem 1rem; color: var(--silver-dim); }
+.site-footer p { margin: 0; }
+
+/* 10. Responsive layout (phones and small tablets) */
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-top: 2.5rem; gap: 2rem; }
+  .arch { width: 11rem; justify-self: start; }
+  .nav__toggle { display: block; }
+  .nav__menu { display: none; position: absolute; inset: 100% 0 auto 0; flex-direction: column; gap: 0; background: var(--black); border-bottom: 1px solid var(--crimson); padding: 0.5rem 1.25rem; }
+  .nav__menu.is-open { display: flex; }
+  .nav__menu a { display: block; padding: 0.8rem 0; }
+  .section { padding: 3.5rem 1.25rem; }
+}
+
+/* Respect people who turn animations off in their system settings */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

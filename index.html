@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nocturne, a gothic-inspired developer portfolio.">
+  <title>Nocturne | Developer portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#home">Nocturne</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <ul class="nav__menu" id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experiments">Experiments</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div>
+        <h1 class="hero__title">Nico</h1>
+        <p class="hero__lead">Beginner web developer. I'm learning HTML, CSS and JavaScript by building things slowly, by hand, in the dark.</p>
+        <div class="hero__actions">
+          <a class="btn" href="#projects">See my work</a>
+          <a class="btn btn--ghost" href="#contact">Write to me</a>
+        </div>
+      </div>
+      <div class="arch" aria-hidden="true"></div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About</h2>
+      <div class="rule" aria-hidden="true">✠</div>
+      <p class="prose">I'm a beginner web developer. I'm learning HTML, CSS and JavaScript by building this portfolio from scratch, one stage at a time, and I use Git and GitHub to keep track of it.</p>
+      <p class="prose">I like dark, quiet design, and I'm learning how to make it readable on every screen.</p>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="rule" aria-hidden="true">✠</div>
+      <div class="grid">
+        <article class="card"><h3>HTML5</h3></article>
+        <article class="card"><h3>CSS3</h3></article>
+        <article class="card"><h3>JavaScript</h3></article>
+        <article class="card"><h3>Git and GitHub</h3><p class="status">Learning</p></article>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="rule" aria-hidden="true">✠</div>
+      <div class="grid grid--wide">
+        <article class="card">
+          <h3>Nocturne</h3>
+          <p>This portfolio: a gothic, responsive site built from scratch.</p>
+          <ul class="tags"><li>HTML5</li><li>CSS3</li><li>JavaScript</li></ul>
+          <button class="more" type="button" aria-expanded="false" aria-controls="nocturne-details">Show details</button>
+          <div class="card__details" id="nocturne-details" hidden>
+            <p>Semantic HTML, Flexbox and Grid layouts, a mobile menu, a cassette player, and a validated contact form. Status: in progress.</p>
+            <!-- add git link ere -->
+          </div>
+        </article>
+        <article class="card card--empty">
+          <!--  replace with a real project -->
+          <p>More projects will be added here as I finish them.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiments" class="section">
+      <h2>Experiments</h2>
+      <div class="rule" aria-hidden="true">✠</div>
+      <p class="prose">A shelf for small ideas. First up: a cassette that plays a drone generated in your browser, so it needs no audio files.</p>
+      <div class="tape" id="tape">
+        <audio id="cassette-audio" preload="metadata">
+          <source src="assets/audio/cassette.mp3" type="audio/mpeg">
+        </audio>
+        <div class="tape__shell">
+          <div class="tape__label"><span id="tape-side">Side A</span><span>Midnight drone</span></div>
+          <div class="tape__window"><span class="reel"></span><span class="reel"></span></div>
+        </div>
+        <div class="tape__controls">
+          <button class="btn" id="tape-play" type="button" aria-pressed="false">Play</button>
+          <button class="btn btn--ghost" id="tape-flip" type="button">Flip tape</button>
+          <label>Volume <input id="tape-vol" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+        </div>
+      </div>
+    </section>
+
+   <section id="contact" class="section">
+  <h2>Contact</h2>
+  <div class="rule" aria-hidden="true">✠</div>
+
+  <p class="prose">
+    For professional inquiries, you can reach me by email.
+  </p>
+
+  <a class="btn"
+   href="https://mail.google.com/mail/?view=cm&to=nico.silva.6000@gmail.com"
+   target="_blank"
+   rel="noopener noreferrer">
+  Send an email
+</a>
+  <p class="status">
+    No contact form. No spam. Just email.
+  </p>
+</section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year">2026</span> Nocturne. Built by hand with HTML, CSS and JavaScript.</p>
+  </footer>
+</body>
+</html>
